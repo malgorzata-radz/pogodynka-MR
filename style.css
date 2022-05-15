@@ -1,0 +1,37 @@
+
+
+body {
+    background-color:beige;
+    margin: 20px;
+    font-family: "Lato", sans-serif;
+    font-size: 14px;
+}
+
+.szukajLista {
+    
+    justify-content: center;
+    border: 1px solid #555555;
+    font-size: 15px
+    width: 17%;
+    height: auto;
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 20px;
+    padding: 2%;
+  }
+
+  .pogoda {
+        
+        padding: 10px;
+        width: 17%;
+        height: auto;
+        border: 1px solid #555555;
+        text-align: center;
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-top: 20px;
+        padding: 2%;
+       
+  }
+ 
