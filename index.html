@@ -16,7 +16,7 @@
 
     <div class="prognozy">
       <div class="pogodaAktualna">
-        <h2 class="headerDzis"></h2>
+        <h3 class="headerDzis"></h3>
         <div class="obrazek"></div>
         <div class="prognoza">
           <div class="temp"></div>
@@ -27,7 +27,7 @@
       </div>
 
       <div class="pogodaJutro">
-        <h2 class="headerJutro"></h2>
+        <h3 class="headerJutro"></h3>
         <div class="obrazek"></div>
         <div class="prognoza">
           <div class="temp"></div>
@@ -98,31 +98,28 @@
             document.querySelector(".pogodaAktualna .obrazek").innerHTML =
               obrazekDzis;
             elementDzisTemp.innerHTML =
-              "Temperatura:" + pogodaAktualna.temperatura + "*C";
+              "Temperatura: " + pogodaAktualna.temperatura + "*C";
             elementDzisZachmurzenie.innerHTML =
               "Zachmurzenie: " + pogodaAktualna.zachmurzenie + "%";
             elementDzisWiatr.innerHTML =
               "Wiatr: " +
               pogodaAktualna.wiatrPrędkość +
-              "km/h   " +
+              "km/h     " +
               pogodaAktualna.wiatrKierunekSłownie;
             elementDzisOpis.innerHTML = pogodaAktualna.opis;
             elementPogodaJutro.innerHTML = "Pogoda Jutro";
+            document.querySelector(".pogodaJutro .obrazek").innerHTML =
+              obrazekJutro;
             elementJutroTemp.innerHTML =
-              "Temperatura:" + pogodaJutro.temperatura + "*C";
+              "Temperatura: " + pogodaJutro.temperatura + "*C";
             elementJutroZachmurzenie.innerHTML =
               "Zachmurzenie: " + pogodaJutro.zachmurzenie + "%";
             elementJutroWiatr.innerHTML =
               "Wiatr: " +
               pogodaJutro.wiatrPrędkość +
-              "km/h     " +
+              "km/h       " +
               pogodaJutro.wiatrKierunekSłownie;
             elementJutroOpis.innerHTML = pogodaJutro.opis;
-
-            document.querySelector(".pogodaAktualna .obrazek").innerHTML =
-              obrazekDzis;
-            document.querySelector(".pogodaJutro .obrazek").innerHTML =
-              obrazekJutro;
           });
         });
       }
