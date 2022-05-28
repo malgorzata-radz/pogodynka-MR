@@ -2,33 +2,136 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>POGODYNKA</title>
+    <title>Pogodynka</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <br />
-    <div class="szukajLista">
-      <input class="wybranyInput" placeholder="Wpisz miasto" />
-      <button class="szukajPrzycisk">Szukaj</button>
+    <input id="input" list="miasta" placeholder="wpisz szukane miasto" />
+    <datalist id="miasta"></datalist>
+
+    <button id="przycisk">Pobierz prognozę pogody!</button>
+
+    <h1 id="wybraneMiasto"></h1>
+    <span class="loader"></span>
+
+    <div class="prognozy">
+      <div class="pogodaAktualna">
+        <h2 class="headerDzis"></h2>
+        <div class="obrazek"></div>
+        <div class="prognoza">
+          <div class="temp"></div>
+          <div class="zachmurzenie"></div>
+          <div class="wiatr"></div>
+          <div class="opis"></div>
+        </div>
+      </div>
+
+      <div class="pogodaJutro">
+        <h2 class="headerJutro"></h2>
+        <div class="obrazek"></div>
+        <div class="prognoza">
+          <div class="temp"></div>
+          <div class="zachmurzenie"></div>
+          <div class="wiatr"></div>
+          <div class="opis"></div>
+        </div>
+      </div>
     </div>
+    <script>
+      let elementwybraneMiasto = document.querySelector("#input");
+      let elementDzisTemp = document.querySelector(".pogodaAktualna .temp");
+      let elementDzisZachmurzenie = document.querySelector(
+        ".pogodaAktualna .zachmurzenie"
+      );
+      let elementDzisWiatr = document.querySelector(".pogodaAktualna .wiatr");
+      let elementDzisOpis = document.querySelector(".pogodaAktualna .opis");
 
-    <div class="pogoda">
-      <p><span class="wybraneMiasto"> aktualna pogoda </span></p>
+      let elementJutroTemp = document.querySelector(".pogodaJutro .temp");
+      let elementJutroZachmurzenie = document.querySelector(
+        ".pogodaJutro .zachmurzenie"
+      );
+      let elementJutroWiatr = document.querySelector(".pogodaJutro .wiatr");
+      let elementJutroOpis = document.querySelector(".pogodaJutro .opis");
 
-      <div>Temperatura: <span class="tempDzis"></span></div>
-      <div>Zachmurzenie: <span class="zachmurzenieDzis"></span></div>
-      <div>Kierunek wiatru:<span class="wiatrDzis"></span></div>
-      <div>Opis: <span class="opisDzis"></span></div>
-    </div>
+      let elementPrzycisk = document.querySelector("#przycisk");
+      let elementPogodaAktualna = document.querySelector(".headerDzis");
+      let elementPogodaJutro = document.querySelector(".headerJutro");
 
-    <div class="pogoda">
-      <p><span class="wybraneMiasto"> prognoza na jutro </span></p>
-      <div>Temperatura: <span class="pogodaJutro"></span></div>
-      <div>Zachmurzenie: <span class="zachmurzenieJutro"></span></div>
-      <div>Kierunek wiatru:<span class="wiatrJutro"></span></div>
-      <div>Opis: <span class="więcejJutro"></span></div>
-    </div>
+      function pobierzMiasta() {
+        document.querySelector("#miasta").innerHTML = "";
+        let wybraneMiasto = elementwybraneMiasto.value;
+        let wyszukanaFraza =
+          "https://www.wowapi.pl/pogoda/miasta?szukaj=" + wybraneMiasto;
+        fetch(wyszukanaFraza).then(function (odpowiedz) {
+          odpowiedz.json().then(function (dane) {
+            console.log(dane);
+            let listaMiast = "";
+            for (let element of dane) {
+              listaMiast += '<option value ="' + element.nazwa + '"/>';
+            }
+            document.querySelector("#miasta").innerHTML = listaMiast;
+          });
+        });
+      }
 
-    <script src="script.js"></script>
+      function pobierzDane() {
+        let wybraneMiasto = elementwybraneMiasto.value;
+        console.log(wybraneMiasto);
+        document.querySelector("#wybraneMiasto").innerHTML = wybraneMiasto;
+        let pogodaMiasto =
+          "https://www.wowapi.pl/pogoda/prognoza?miasto=" + wybraneMiasto;
+        fetch(pogodaMiasto).then(function (odpowiedz) {
+          odpowiedz.json().then(function (dane) {
+            let pogodaAktualna = dane.teraz;
+            let pogodaJutro = dane.prognoza.jutro;
+            let obrazekDzis =
+              "<img src='icons/" +
+              pogodaAktualna.ikonka +
+              ".png' width='200' height='150'>";
+            let obrazekJutro =
+              "<img src='icons/" +
+              pogodaJutro.ikonka +
+              ".png' width='200' height='150'>";
+            console.log(pogodaAktualna);
+            console.log(pogodaJutro);
+            elementPogodaAktualna.innerHTML = "Pogoda Aktualna";
+            document.querySelector(".pogodaAktualna .obrazek").innerHTML =
+              obrazekDzis;
+            elementDzisTemp.innerHTML =
+              "Temperatura:" + pogodaAktualna.temperatura + "*C";
+            elementDzisZachmurzenie.innerHTML =
+              "Zachmurzenie: " + pogodaAktualna.zachmurzenie + "%";
+            elementDzisWiatr.innerHTML =
+              "Wiatr: " +
+              pogodaAktualna.wiatrPrędkość +
+              "km/h   " +
+              pogodaAktualna.wiatrKierunekSłownie;
+            elementDzisOpis.innerHTML = pogodaAktualna.opis;
+            elementPogodaJutro.innerHTML = "Pogoda Jutro";
+            elementJutroTemp.innerHTML =
+              "Temperatura:" + pogodaJutro.temperatura + "*C";
+            elementJutroZachmurzenie.innerHTML =
+              "Zachmurzenie: " + pogodaJutro.zachmurzenie + "%";
+            elementJutroWiatr.innerHTML =
+              "Wiatr: " +
+              pogodaJutro.wiatrPrędkość +
+              "km/h     " +
+              pogodaJutro.wiatrKierunekSłownie;
+            elementJutroOpis.innerHTML = pogodaJutro.opis;
+
+            document.querySelector(".pogodaAktualna .obrazek").innerHTML =
+              obrazekDzis;
+            document.querySelector(".pogodaJutro .obrazek").innerHTML =
+              obrazekJutro;
+          });
+        });
+      }
+
+      document
+        .querySelector("#przycisk")
+        .addEventListener("click", pobierzDane);
+
+      input.addEventListener("keypress", pobierzMiasta);
+    </script>
   </body>
 </html>
