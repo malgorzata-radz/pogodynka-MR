@@ -11,9 +11,8 @@
 
     <button id="przycisk">Pobierz prognozę pogody!</button>
 
+    <div class="loader"></div>
     <h1 id="wybraneMiasto"></h1>
-    <span class="loader"></span>
-
     <div class="prognozy">
       <div class="pogodaAktualna">
         <h3 class="headerDzis"></h3>
@@ -124,11 +123,19 @@
         });
       }
 
-      document
-        .querySelector("#przycisk")
-        .addEventListener("click", pobierzDane);
+      function funkcjaPrzycisku() {
+        console.log("start");
+        setTimeout(() => {
+          pobierzDane();
+          console.log("stop");
+        }, 2000);
+      }
 
       input.addEventListener("keypress", pobierzMiasta);
+
+      document
+        .querySelector("#przycisk")
+        .addEventListener("click", funkcjaPrzycisku);
     </script>
   </body>
 </html>

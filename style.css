@@ -6,14 +6,27 @@ body {
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
+.loader{
+    display: none;
+}
+#wybraneMiasto {
+    display:flex;
+    text-align: center;
+}
 .prognozy {
     display: flex;
-    flex-direction: row;
-   
+    flex-direction: row; 
+    height: auto;
+    width: auto;
 }
 
 .pogodaAktualna {
+    text-align: center;
+    border: 
     
+}
+.pogodaJutro{
+    text-align: center;
 }
 
 .obrazek {
@@ -22,11 +35,9 @@ body {
     display: block;
 }
 
-.pogoda {
+.prognoza {
         
-        padding: 10px;
-        width: 17%;
-        height: auto;
-        border: 1px solid #555555;
+        text-align: left;
+        
   }
  
