@@ -11,7 +11,9 @@
 
     <button id="przycisk">Pobierz prognozę pogody!</button>
 
-    <div class="loader"></div>
+    <div id="loader">
+      <img src="icons/loading.svg" />
+    </div>
     <h1 id="wybraneMiasto"></h1>
     <div class="prognozy">
       <div class="pogodaAktualna">
@@ -124,10 +126,15 @@
       }
 
       function funkcjaPrzycisku() {
+        // document
+        //   .querySelector(".prognozy")
+        //   .document.querySelector("#wybraneMiasto").innerHTML = "";
         console.log("start");
+        document.getElementById("loader").style.display = "block";
         setTimeout(() => {
           pobierzDane();
           console.log("stop");
+          document.getElementById("loader").style.display = "none";
         }, 2000);
       }
 
