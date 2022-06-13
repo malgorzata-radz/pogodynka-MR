@@ -126,9 +126,19 @@
       }
 
       function funkcjaPrzycisku() {
-        // document
-        //   .querySelector(".prognozy")
-        //   .document.querySelector("#wybraneMiasto").innerHTML = "";
+        document.querySelector("#wybraneMiasto").innerHTML = "";
+        elementPogodaAktualna.innerHTML = "";
+        document.querySelector(".pogodaAktualna .obrazek").innerHTML = "";
+        elementDzisTemp.innerHTML = "";
+        elementDzisZachmurzenie.innerHTML = "";
+        elementDzisWiatr.innerHTML = "";
+        elementDzisOpis.innerHTML = "";
+        elementPogodaJutro.innerHTML = "";
+        document.querySelector(".pogodaJutro .obrazek").innerHTML = "";
+        elementJutroTemp.innerHTML = "";
+        elementJutroZachmurzenie.innerHTML = "";
+        elementJutroWiatr.innerHTML = "";
+        elementJutroOpis.innerHTML = "";
         console.log("start");
         document.getElementById("loader").style.display = "block";
         setTimeout(() => {
